@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>소환사의 정보는</h1>
+<div style="background-color:green; color=white; font-weight:bold;">소환사 정보는</div>
 <p>${summonerVO.getName() }의 ${leagueEntryDTO.getQueueType() }랭크는 ${leagueEntryDTO.getTier() } ${leagueEntryDTO.getRank() }이고 점수는 ${leagueEntryDTO.getLeaguePoints() }입니다.</p>
 
 </body>

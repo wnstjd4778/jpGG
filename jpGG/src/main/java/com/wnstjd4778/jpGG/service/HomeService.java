@@ -15,7 +15,7 @@ import com.wnstjd4778.jpGG.vo.SummonerVO;
 
 @Service
 public class HomeService {
-	private static final String API_KEY = "RGAPI-047c99de-4536-4719-81fa-154a6de459a5";
+	private static final String API_KEY = "RGAPI-d5aac9fd-067c-4922-8e88-e17898bb9e2d";
 
 	public SummonerVO searchSummonerId(String SummonerName) {
 		SummonerVO temp = null;
@@ -52,10 +52,10 @@ public class HomeService {
 	public LeagueEntryDTO searchSummonerTier(String id) {
 		LeagueEntryDTO leagueEntryDTO = null;
 		try {
-			String url2 = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/" + 
+			String urlstr = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/" + 
 							id + "?api_key=" + API_KEY;
 			JsonParser jsonParser = new JsonParser();
-			URL url = new URL(url2);
+			URL url = new URL(urlstr);
 			URLConnection urlConn = url.openConnection();
 			BufferedReader in = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
 			String inputLine;

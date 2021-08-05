@@ -17,20 +17,43 @@ import com.wnstjd4778.jpGG.member.service.MemberService;
 import com.wnstjd4778.jpGG.member.vo.MemberVO;
 
 @Controller
-@RequestMapping(value="/member", method=RequestMethod.POST)
+@RequestMapping(value="/member", method={RequestMethod.POST,RequestMethod.GET})
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping(value="/login", method=RequestMethod.POST)
+	@RequestMapping(value="/login", method= {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView login(@RequestParam Map<String, String> loginMap,
 							HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = memberService.login(loginMap);
-		
-		mav.addObject("memberVO", memberVO);
-		mav.setViewName("loginForm");
+		if(memberVO!= null && memberVO.getMemberId()!=null){
+			HttpSession session = request.getSession();
+			session.setAttribute("isLogOn", true);
+			session.setAttribute("memberVO", memberVO);
+			session.setMaxInactiveInterval(10);
+		}
+		mav.setViewName("home");
 		return mav;
 	}
+	
+	@RequestMapping(value="/logout", method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		session.setAttribute("isLogOn", false);
+		session.removeAttribute("memberVO");
+		mav.setViewName("home");
+		return mav;
+	}
+	
+	@RequestMapping(value="/addMember", method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView addMember(@RequestParam MemberVO memberVO, 
+									HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		memberService.addMember(memberVO);
+		return mav;
+	}
+	
 
 }

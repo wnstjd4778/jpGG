@@ -16,5 +16,9 @@ public class MemberService {
 	public MemberVO login(Map loginMap) {
 		return memberDAO.login(loginMap);
 	}
+	
+	public void addMember(MemberVO memberVO) {
+		memberDAO.addMember(memberVO);
+	}
 
 }

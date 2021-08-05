@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,17 +25,25 @@ public class HomeController {
 	@Autowired
 	private HomeService homeService;
 	
+	@RequestMapping(value="/memberForm" ,method={RequestMethod.POST,RequestMethod.GET})
+	protected  ModelAndView viewForm(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("memberForm");
+		return mav;
+	}
 	
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, Model model, HttpServletRequest request) {
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		
 		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate );
 		return "home";
 	}
+	
+	
+	
+	
 	
 	@RequestMapping(value = "/result", method = RequestMethod.GET)
 	public ModelAndView result(@RequestParam("summonerName") String summonerName, HttpServletRequest request, HttpServletResponse response) {

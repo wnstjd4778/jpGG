@@ -1,25 +1,33 @@
 
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ page session="false"%>
+	pageEncoding="utf-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!Doctype html>
 <html>
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="css/bootstrap.css?after">
 <title>jpGG에 오신걸 환영합니다.</title>
 </head>
 <body>
 	<div style="text-align:right; background-color:green;">
+	<c:choose>
+	<c:when test="${isLogOn == true }">
+	<a href="${contextPath }/jpGG/mypage/home">마이페이지</a>
+	<a href="${contextPath }/jpGG/member/logout">로그아웃</a></c:when>
+	<c:otherwise>
 	<form action="/jpGG/member/login" method="post">
 		ID <input type="text" placeholder="아이디를 입력하세요" name="memberId"><br>
 		PW <input type="password" name="memberPassword"><br>
+		<a href="${contextPath }/jpGG/a/memberForm">회원가입</a>
 		<button type="submit">로그인!</button>
+		
 	</form>
+	</c:otherwise>
+	</c:choose>
+	</div>
 	<div style="background-color:yellow;">
 		<table style="text-align:center; border-spacing:30px; margin-left:auto;margin-right:auto">
 			<tr>
@@ -30,8 +38,7 @@
 			</tr>
 		</table>
 	</div>
-	</div>
-
+	
 	<div style="padding-top: 20px; text-align: center; font-size: 80px;">jpGG</div>
 	<div style="text-align: center;font-size:30px;">
 		<form action="/jpGG/a/result" method="GET">

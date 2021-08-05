@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% session.setAttribute("isLogOn", true); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 </head>
 <body>
 <p>로그인성공</p>
-<p>${memberVO.getMemberId() }   ${memberVO.getMemberPassword() }</p>
+
+<p>${isLogOn} ${memberVO.getMemberId() }   ${memberVO.getMemberPassword() }</p>
 </body>
 </html>

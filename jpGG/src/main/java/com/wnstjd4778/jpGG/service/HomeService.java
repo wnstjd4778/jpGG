@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -15,7 +18,7 @@ import com.wnstjd4778.jpGG.vo.SummonerVO;
 
 @Service
 public class HomeService {
-	private static final String API_KEY = "RGAPI-d5aac9fd-067c-4922-8e88-e17898bb9e2d";
+	private static final String API_KEY = "RGAPI-2b28221e-6305-4a60-a245-4d90a9aaa70a";
 
 	public SummonerVO searchSummonerId(String SummonerName) {
 		SummonerVO temp = null;
@@ -31,7 +34,6 @@ public class HomeService {
 			String result = "";
 			while ((inputLine = in.readLine()) != null) {
 				result = result + inputLine;
-				System.out.println(inputLine);
 			}
 			JsonObject json = (JsonObject) jsonParser.parse(result);
 			String id = json.get("id").getAsString();
@@ -49,8 +51,9 @@ public class HomeService {
 		return temp;
 	}
 	
-	public LeagueEntryDTO searchSummonerTier(String id) {
-		LeagueEntryDTO leagueEntryDTO = null;
+	public List<LeagueEntryDTO> searchSummonerTier(String id) {
+		List<LeagueEntryDTO> list = new ArrayList<LeagueEntryDTO>();
+		LeagueEntryDTO leagueEntryDTO;
 		try {
 			String urlstr = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/" + 
 							id + "?api_key=" + API_KEY;
@@ -63,8 +66,9 @@ public class HomeService {
 			while ((inputLine = in.readLine()) != null) {
 				result = result + inputLine;
 			}
-			JsonArray ar = (JsonArray) jsonParser.parse(result);
-			JsonObject json = ar.get(0).getAsJsonObject();
+			JsonArray arr = (JsonArray) jsonParser.parse(result);
+			for(int i = 0; i < arr.size(); i++) {
+			JsonObject json = arr.get(i).getAsJsonObject();
 			String leagueId = json.get("leagueId").getAsString();
 			String queueType = json.get("queueType").getAsString();
 			String tier = json.get("tier").getAsString();
@@ -73,10 +77,13 @@ public class HomeService {
 			int wins = json.get("wins").getAsInt();
 			int losses = json.get("losses").getAsInt();
 			leagueEntryDTO = new LeagueEntryDTO(leagueId, queueType, tier, rank, leaguePoints, wins, losses);
+			list.add(leagueEntryDTO);
+			}
+			Collections.sort(list);
 			in.close();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return leagueEntryDTO;
+		return list;
 	}
 }

@@ -2,11 +2,11 @@ package com.wnstjd4778.jpGG.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,9 +50,13 @@ public class HomeController {
 		
 		ModelAndView mav = new ModelAndView();
 		SummonerVO summonerVO = homeService.searchSummonerId(summonerName);
-		LeagueEntryDTO leagueEntryDTO = homeService.searchSummonerTier(summonerVO.getId());
+		if(summonerVO == null) {
+			mav.setViewName("home");
+			return mav;
+		}
+		List<LeagueEntryDTO> leagueEntryDTOList = homeService.searchSummonerTier(summonerVO.getId());
 		mav.addObject("summonerVO", summonerVO);
-		mav.addObject("leagueEntryDTO", leagueEntryDTO);
+		mav.addObject("leagueEntryDTOList", leagueEntryDTOList);
 		mav.setViewName("result");
 		return mav;
 	}

@@ -1,6 +1,6 @@
 package com.wnstjd4778.jpGG.vo;
 
-public class LeagueEntryDTO {
+public class LeagueEntryDTO implements Comparable<LeagueEntryDTO>{
 	private String LeagueId;
 	private String queueType;
 	private String tier;
@@ -106,6 +106,10 @@ public class LeagueEntryDTO {
 		this.leaguePoints = leaguePoints;
 		this.wins = wins;
 		this.losses = losses;
+	}
+	@Override
+	public int compareTo(LeagueEntryDTO o) {
+		return o.getQueueType().compareTo(this.queueType);
 	}
 	
 	

@@ -33,7 +33,7 @@
 			<tr>
 				<th><a href="">챔피언분석</a></th>
 				<th><a href="">통계</a></th>
-				<th><a href="">랭킹</a></th>
+				<th><a href="${contextPath }/jpGG/ranker/solo">랭킹</a></th>
 				<th><a href="">멀티서치</a></th>
 			</tr>
 		</table>

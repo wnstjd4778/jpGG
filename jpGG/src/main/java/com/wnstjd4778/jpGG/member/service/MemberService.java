@@ -18,7 +18,7 @@ public class MemberService {
 	}
 	
 	public void addMember(MemberVO memberVO) {
-		memberDAO.addMember(memberVO);
+		//memberDAO.addMember(memberVO);
 	}
 
 }

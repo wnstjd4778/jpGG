@@ -18,7 +18,7 @@ import com.wnstjd4778.jpGG.vo.SummonerVO;
 
 @Service
 public class HomeService {
-	private static final String API_KEY = "RGAPI-2b28221e-6305-4a60-a245-4d90a9aaa70a";
+	private static final String API_KEY = "RGAPI-842e3ef1-b8aa-4e78-ab79-5062bd356561";
 
 	public SummonerVO searchSummonerId(String SummonerName) {
 		SummonerVO temp = null;

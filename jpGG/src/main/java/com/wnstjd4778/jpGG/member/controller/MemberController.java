@@ -55,5 +55,12 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping(value="/loginForm", method=RequestMethod.POST)
+	public ModelAndView loginForm(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("loginForm");
+		return mav;
+	}
+	
 
 }

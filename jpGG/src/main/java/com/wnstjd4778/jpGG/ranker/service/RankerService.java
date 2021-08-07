@@ -18,7 +18,7 @@ import com.wnstjd4778.jpGG.ranker.vo.RankerVO;
 
 @Service
 public class RankerService {
-	private static final String API_KEY = "RGAPI-2b28221e-6305-4a60-a245-4d90a9aaa70a";
+	private static final String API_KEY = "RGAPI-842e3ef1-b8aa-4e78-ab79-5062bd356561";
 
 	public List<RankerVO> searchSoloRanker() {
 		List<RankerVO> list = new ArrayList<RankerVO>();

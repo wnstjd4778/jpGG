@@ -15,6 +15,7 @@
 	<div style="text-align:right; background-color:green;">
 	<c:choose>
 	<c:when test="${isLogOn == true }">
+	<h5>${memberVO.getMemberId() }</h5>
 	<a href="${contextPath }/jpGG/mypage/home">마이페이지</a>
 	<a href="${contextPath }/jpGG/member/logout">로그아웃</a></c:when>
 	<c:otherwise>
@@ -31,6 +32,7 @@
 	<div style="background-color:yellow;">
 		<table style="text-align:center; border-spacing:30px; margin-left:auto;margin-right:auto">
 			<tr>
+				<th><a href="${contextPath }/jpGG/board/listArticles">게시판</a></th>
 				<th><a href="">챔피언분석</a></th>
 				<th><a href="">통계</a></th>
 				<th><a href="${contextPath }/jpGG/ranker/solo">랭킹</a></th>
